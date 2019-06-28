@@ -1,131 +1,140 @@
-
-$(document).ready(function(){
-	"use strict";
-
-	var window_width 	 = $(window).width(),
-	window_height 		 = window.innerHeight,
-	header_height 		 = $(".default-header").height(),
-	header_height_static = $(".site-header.static").outerHeight(),
-	fitscreen 			 = window_height - header_height;
+/* =================================
+------------------------------------
+	Civic - CV Resume
+	Version: 1.0
+ ------------------------------------ 
+ ====================================*/
 
 
-	$(".fullscreen").css("height", window_height)
-	$(".fitscreen").css("height", fitscreen);
 
-  //-------- Active Sticky Js ----------//
-  $(".default-header").sticky({topSpacing:0});
-
-     if(document.getElementById("default-select")){
-          $('select').niceSelect();
-    };
-
-    $('.img-pop-up').magnificPopup({
-        type: 'image',
-        gallery:{
-        enabled:true
-        }
-    });
+'use strict';
 
 
-  // $('.navbar-nav>li>a').on('click', function(){
-  //     $('.navbar-collapse').collapse('hide');
-  // });
+$(window).on('load', function() { 
+	/*------------------
+		Preloder
+	--------------------*/
+	$(".loader").fadeOut(); 
+	$("#preloder").delay(400).fadeOut("slow");
 
-    $('.play-btn').magnificPopup({
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false
-    });
+});
 
-    $('.active-works-carousel').owlCarousel({
-        items:1,
-        loop:true,
-        margin: 100,
-        dots: true,
-        autoplay:true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1,
-            },
-            768: {
-                items: 1,
-            }
-        }
-    });
 
-    $('.active-gallery').owlCarousel({
-        items:6,
-        loop:true,
-        dots: true,
-        autoplay:true,
-        nav:true,
-        navText: ["<span class='lnr lnr-arrow-up'></span>",
-        "<span class='lnr lnr-arrow-down'></span>"],        
-            responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1,
-            },
-            768: {
-                items: 2,
-            },
-            900: {
-                items: 6,
-            }
+(function($) {
 
-        }
-    });
+	/*------------------
+		Background set
+	--------------------*/
+	$('.set-bg').each(function() {
+		var bg = $(this).data('setbg');
+		$(this).css('background-image', 'url(' + bg + ')');
+	});
+
+
+	$('.review-slider').owlCarousel({
+		loop: true,
+		nav: false,
+		dots: true,
+		items: 1,
+		autoplay: true
+	});
+
+
+
+	$('.progress-bar-style').each(function() {
+		var progress = $(this).data("progress");
+		var prog_width = progress + '%';
+		if (progress <= 100) {
+			$(this).append('<div class="bar-inner" style="width:' + prog_width + '"><span>' + prog_width + '</span></div>');
+		}
+		else {
+			$(this).append('<div class="bar-inner" style="width:100%"><span>' + prog_width + '</span></div>');
+		}
+	});
+
+
+	$('.lan-prog').each(function() {
+		var progress = $(this).data("lanprogesss");
+		var ele      = '<span></span>';
+		var ele_fade = '<span class="fade-ele"></span>';
+		
+		for (var i = 1; i <= 5; i++) {
+			if(i <= progress){
+				$(this).append(ele);
+			} else {
+				$(this).append(ele_fade);
+			}
+		}
+	});
+
+
+	/*------------------
+		Popup
+	--------------------*/
+	$('.portfolio-item .port-pic').magnificPopup({
+		type: 'image',
+		mainClass: 'img-popup-warp',
+		removalDelay: 500,
+	});
 
 
 
 
+if($().circleProgress){
 
-    // Select all links with hashes
-    $('.navbar-nav a[href*="#"]')
-    // Remove links that don't actually link to anything
-    .not('[href="#"]')
-    .not('[href="#0"]')
-    .on('click',function(event) {
-    // On-page links
-    if (
-      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-      && 
-      location.hostname == this.hostname
-    ) {
-      // Figure out element to scroll to
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      // Does a scroll target exist?
-      if (target.length) {
-        // Only prevent default if animation is actually gonna happen
-        event.preventDefault();
-        $('html, body').animate({
-          scrollTop: target.offset().top-50
-        }, 1000, function() {
-          // Callback after animation
-          // Must change focus!
-          var $target = $(target);
-          $target.focus();
-          if ($target.is(":focus")) { // Checking if the target was focused
-            return false;
-          } else {
-            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-            $target.focus(); // Set focus again
-          };
-        });
-      }
-    }
-    });
+	//Set progress circle 1
+	$("#progress1").circleProgress({
+		value: 0.75,
+		size: 175,
+		thickness: 2,
+		fill: "#40424a",
+		emptyFill: "rgba(0, 0, 0, 0)"
+	});
+	//Set progress circle 2
+	$("#progress2").circleProgress({
+		value: 0.83,
+		size: 175,
+		thickness: 2,
+		fill: "#40424a",
+		emptyFill: "rgba(0, 0, 0, 0)"
+	});
 
-      $(document).ready(function() {
-          $('#mc_embed_signup').find('form').ajaxChimp();
-      });   
+	//Set progress circle white
+	$("#progress3").circleProgress({
+		value: 0.75,
+		size: 175,
+		thickness: 2,
+		fill: "#ffffff",
+		emptyFill: "rgba(0, 0, 0, 0)"
+	});
 
- });
+	//Set progress circle white
+	$("#progress4").circleProgress({
+		value: 0.83,
+		size: 175,
+		thickness: 2,
+		fill: "#ffffff",
+		emptyFill: "rgba(0, 0, 0, 0)"
+	});
+
+	//Set progress circle skyblue
+	$("#progress5").circleProgress({
+		value: 0.75,
+		size: 175,
+		thickness: 2,
+		fill: "#009fff",
+		emptyFill: "rgba(0, 0, 0, 0)"
+	});
+
+	//Set progress circle skyblue
+	$("#progress6").circleProgress({
+		value: 0.83,
+		size: 175,
+		thickness: 2,
+		fill: "#009fff",
+		emptyFill: "rgba(0, 0, 0, 0)"
+	});
+}
+
+})(jQuery);
+
